@@ -1,6 +1,12 @@
 package com.example.multitouch;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.view.Menu;
 
@@ -10,6 +16,22 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		File root = Environment.getExternalStorageDirectory();
+		File file = new File(root, "t1.txt");
+		
+		try {
+			if(!file.exists()){
+				file.createNewFile();
+			}
+			FileWriter fw;
+			fw = new FileWriter(file);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("Trollololol!");
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
